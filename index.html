@@ -31,27 +31,47 @@
       overflow-x: hidden;
     }
 
+    /* Reduced header height to better fit the image */
     header {
-      height: 100vh;
+      height: 80vh; /* Reduced from 100vh */
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
-      position: relative;
-      background: url('/api/placeholder/1200/600') center/cover no-repeat; /* Fallback background */
+      overflow: hidden; /* Hide any overflow from the image */
+      background-color: #555; /* Fallback color */
     }
 
-    /* Original CrowdRiff embed container */
-    #header-embed {
+    /* Header custom styling to make sure image fills the space */
+    .header-background {
+      position: absolute;
+      top: -50px; /* Negative margin to help center the image */
+      left: 0;
+      width: 100%;
+      height: calc(100% + 100px); /* Extra height to ensure coverage */
+    }
+
+    .header-background iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: scale(1.2); /* Scale up the iframe content */
+      transform-origin: center center;
+    }
+    
+    /* Backup image solution */
+    .backup-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      display: none; /* Hidden by default, shown if iframe fails */
       z-index: 1;
-      overflow: hidden;
     }
 
     .navbar {
@@ -402,7 +422,7 @@
         rgba(0, 0, 0, 0.4) 0%,
         rgba(0, 0, 0, 0.6) 100%
       );
-      z-index: 2;
+      z-index: 5;
     }
 
     @media (max-width: 768px) {
@@ -420,6 +440,10 @@
     }
 
     @media (max-width: 576px) {
+      header {
+        height: 70vh; /* Even shorter on mobile */
+      }
+      
       .hero-title {
         font-size: 2.8rem;
       }
@@ -445,9 +469,11 @@
 </head>
 <body>
   <header id="home">
-    <div id="header-embed">
+    <div class="header-background">
       <!-- Header Background Image -->
       <script type="text/javascript" id="cr-embed-87269fc077d4d30e56fd6425" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+      <!-- Backup image in case embed fails -->
+      <img src="/api/placeholder/1200/600" alt="Lisbon Cityscape" class="backup-image">
     </div>
     
     <div class="overlay"></div>
@@ -621,6 +647,17 @@
           behavior: 'smooth'
         });
       });
+    });
+    
+    // Check if header embed loaded properly
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // If the header appears empty after 2 seconds, show the backup image
+        const headerEmbed = document.querySelector('#header-embed iframe');
+        if (!headerEmbed || headerEmbed.offsetHeight < 100) {
+          document.querySelector('.backup-image').style.display = 'block';
+        }
+      }, 2000);
     });
   </script>
 </body>
