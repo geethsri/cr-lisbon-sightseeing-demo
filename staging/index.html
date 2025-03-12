@@ -46,48 +46,10 @@
       z-index: 2000;
     }
 
-    /* Reduced header height to better fit the image */
-    header {
-      height: 80vh; /* Reduced from 100vh */
+    /* LinkedIn-style header structure */
+    .header-container {
+      width: 100%;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      margin-top: 40px; /* Make room for staging banner */
-      overflow: hidden; /* Hide any overflow from the image */
-      background-color: #555; /* Fallback color */
-    }
-
-    /* Header custom styling to make sure image fills the space */
-    .header-background {
-      position: absolute;
-      top: -50px; /* Negative margin to help center the image */
-      left: 0;
-      width: 100%;
-      height: calc(100% + 100px); /* Extra height to ensure coverage */
-    }
-
-    .header-background iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      transform: scale(1.2); /* Scale up the iframe content */
-      transform-origin: center center;
-    }
-    
-    /* Backup image solution */
-    .backup-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none; /* Hidden by default, shown if iframe fails */
-      z-index: 1;
     }
 
     .navbar {
@@ -101,6 +63,7 @@
       align-items: center;
       z-index: 1000;
       transition: all 0.3s ease;
+      background-color: rgba(0, 0, 0, 0.3);
     }
 
     .navbar.scrolled {
@@ -144,21 +107,84 @@
       color: var(--secondary);
     }
 
-    .hero-content {
-      max-width: 800px;
-      padding: 0 2rem;
-      z-index: 10;
+    /* Banner image container */
+    .banner-image-container {
+      width: 100%;
+      height: 400px; /* Fixed height for the banner */
+      overflow: hidden;
+      position: relative;
+      margin-top: 112px; /* Space for the navbar + staging banner */
+    }
+
+    .banner-image {
+      width: 100%;
+      height: 400px;
+      display: block;
       position: relative;
     }
 
+    .backup-banner {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none; /* Only show if embed fails */
+    }
+
+    /* Content section that overlaps with the banner */
+    .hero-content-container {
+      width: 100%;
+      background-color: transparent;
+      margin-top: -100px; /* Overlap with the banner */
+      padding-bottom: 50px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .staging-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--staging-red);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
     .hero-title {
-      font-size: 4.5rem;
+      font-size: 4rem;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      color: var(--dark);
       font-weight: 800;
     }
 
     .hero-subtitle {
-      font-size: 1.6rem;
-      margin-bottom: 2.5rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0,
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: var(--lisbon-blue);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: var(--secondary);
+      color: var(--dark);
+      text-decoration: none;
