@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STAGING - Discover Lisbon - Top Sightseeing Spots</title>
+  <title>Discover Lisbon - Top Sightseeing Spots</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -27,20 +27,6 @@
       overflow-x: hidden;
     }
 
-    /* Staging banner */
-    .staging-banner {
-      background-color: #ff4d4d;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-weight: bold;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 2000;
-    }
-
     header {
       height: 100vh;
       display: flex;
@@ -50,12 +36,11 @@
       text-align: center;
       color: white;
       position: relative;
-      margin-top: 40px; /* Make room for staging banner */
     }
 
     .navbar {
       position: fixed;
-      top: 40px; /* Position below staging banner */
+      top: 0;
       left: 0;
       width: 100%;
       padding: 1.5rem 3rem;
@@ -210,19 +195,6 @@
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-
-    .staging-label {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(255, 77, 77, 0.8);
-      color: white;
-      padding: 3px 8px;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      z-index: 10;
     }
 
     .attraction-card:hover {
@@ -325,4 +297,229 @@
       margin-top: 2rem;
       padding-top: 2rem;
       border-top: 1px solid #4b5563;
-      font-
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    #header-embed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .navbar {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="home">
+    <div id="header-embed">
+      <!-- Horizontal Lisbon Image for Header Background -->
+      <script type="text/javascript" id="cr-embed-9d199787ca54d9939d9b1101" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+    </div>
+    
+    <div class="overlay"></div>
+    
+    <nav class="navbar">
+      <a href="#" class="logo">Discover Lisbon</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#attractions">Attractions</a>
+        <a href="#map">Map</a>
+        <a href="#gallery">Gallery</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Experience The Magic of Lisbon</h1>
+      <p class="hero-subtitle">Discover the colorful streets, historic monuments, and breathtaking viewpoints of Portugal's enchanting capital</p>
+      <a href="#attractions" class="btn">Explore Now</a>
+    </div>
+
+    <a href="#attractions" class="scroll-down">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </header>
+
+  <section id="attractions" class="attractions">
+    <h2 class="section-title">Top Attractions</h2>
+    <p class="section-subtitle">Explore the most beautiful and historic sights Lisbon has to offer</p>
+
+    <div class="attraction-grid">
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- Augusta Arch Embed -->
+          <script type="text/javascript" id="cr-embed-999300e1a79a56ac2ecb5255" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Arco da Rua Augusta</h3>
+          <p class="attraction-desc">This triumphant arch connects Rua Augusta to the impressive Praça do Comércio. Climb to the top for panoramic views of downtown Lisbon and the Tagus River.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- Tram Photo Embed -->
+          <script type="text/javascript" id="cr-embed-556a10ea90911f80c2fe71f8" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Tram 28</h3>
+          <p class="attraction-desc">Hop on this iconic yellow tram for a scenic journey through Lisbon's historic neighborhoods. The route passes by many major attractions and offers a glimpse into local life.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- New Image Embed 1 -->
+          <script type="text/javascript" id="cr-embed-eff5367a2781cd8db79b7b46" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Alfama District</h3>
+          <p class="attraction-desc">Lose yourself in Lisbon's oldest neighborhood, a labyrinth of narrow streets, ancient houses, and hidden squares. Experience authentic Fado music in local taverns.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- New Image Embed 2 -->
+          <script type="text/javascript" id="cr-embed-4a83164628befbf149f5ad91" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">São Jorge Castle</h3>
+          <p class="attraction-desc">Perched atop Lisbon's highest hill, this ancient castle offers panoramic views of the city. Explore the archaeological site and walk along the medieval walls.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- Generic Lisbon Embed -->
+          <script type="text/javascript" id="cr-embed-8ff05b57ecbb70402ee706ad" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">LX Factory</h3>
+          <p class="attraction-desc">Once an industrial complex, now a creative hub filled with shops, restaurants, and art spaces. Visit on Sunday for the weekly market featuring local artisans and vintage finds.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-img-container">
+          <!-- Pastel de Nata Embed -->
+          <script type="text/javascript" id="cr-embed-c4d338ed55d6caa9e3d300a8" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Pastéis de Belém</h3>
+          <p class="attraction-desc">Visit the original bakery that has been making the famous Pastéis de Nata since 1837. These delicious custard tarts are a culinary icon of Portugal and a must-try delicacy.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="map" class="map-section">
+    <h2 class="section-title">Interactive Map</h2>
+    <p class="section-subtitle">Find your way around Lisbon's top sightseeing spots</p>
+    
+    <div class="map-container">
+      <!-- Map Embed -->
+      <script id="cr-init-map__1d987e787e84d5a9" src="https://map-embeds.crowdriff.com/js/crowdriff.js" async></script>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery-section">
+    <h2 class="section-title">Lisbon Gallery</h2>
+    <p class="section-subtitle">Browse through stunning images of Lisbon's most beautiful spots</p>
+    
+    <div class="gallery-container">
+      <!-- Gallery Embed -->
+      <div class="crowdriff-embed">
+        <script id="cr-init__fcabf9a5e2908b35" src="https://starling.crowdriff.com/js/crowdriff.js" async></script>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Discover Lisbon is your ultimate guide to exploring the vibrant capital of Portugal. We provide curated information on the best attractions, hidden gems, and local experiences.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: info@discoverlisbon.com</p>
+        <p>Phone: +351 123 456 789</p>
+        <p>Address: Praça do Comércio, Lisbon, Portugal</p>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <p>Stay updated with our latest tips and recommendations</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Discover Lisbon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
