@@ -46,28 +46,48 @@
       z-index: 2000;
     }
 
+    /* Reduced header height to better fit the image */
     header {
-      height: 100vh;
+      height: 80vh; /* Reduced from 100vh */
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       color: white;
-      position: relative;
       margin-top: 40px; /* Make room for staging banner */
-      background: url('/api/placeholder/1200/600') center/cover no-repeat; /* Fallback background */
+      overflow: hidden; /* Hide any overflow from the image */
+      background-color: #555; /* Fallback color */
     }
 
-    /* Original CrowdRiff embed container */
-    #header-embed {
+    /* Header custom styling to make sure image fills the space */
+    .header-background {
+      position: absolute;
+      top: -50px; /* Negative margin to help center the image */
+      left: 0;
+      width: 100%;
+      height: calc(100% + 100px); /* Extra height to ensure coverage */
+    }
+
+    .header-background iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transform: scale(1.2); /* Scale up the iframe content */
+      transform-origin: center center;
+    }
+    
+    /* Backup image solution */
+    .backup-image {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      display: none; /* Hidden by default, shown if iframe fails */
       z-index: 1;
-      overflow: hidden;
     }
 
     .navbar {
@@ -141,77 +161,4 @@
     .hero-subtitle {
       font-size: 1.6rem;
       margin-bottom: 2.5rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-      max-width: 700px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background-color: var(--secondary);
-      color: var(--dark);
-      text-decoration: none;
-      font-weight: 700;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 1.1rem;
-    }
-
-    .btn:hover {
-      background-color: var(--primary);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .scroll-down {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 2rem;
-      color: white;
-      animation: bounce 2s infinite;
-      cursor: pointer;
-      z-index: 10;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-20px);
-      }
-      60% {
-        transform: translateY(-10px);
-      }
-    }
-
-    section {
-      padding: 6rem 2rem;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-      position: relative;
-      padding-bottom: 1rem;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background-color: var(--secondary);
-      border-radius: 2px;
-    }
-
-    .section
+      text-shadow: 1px 1px 3px rgba(0, 0, 0,
