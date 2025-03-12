@@ -40,28 +40,18 @@
       text-align: center;
       color: white;
       position: relative;
+      background: url('/api/placeholder/1200/600') center/cover no-repeat; /* Fallback background */
     }
 
-    /* Fixed header background to fully cover the area */
-    .header-background {
+    /* Original CrowdRiff embed container */
+    #header-embed {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
-      background-color: #444; /* Fallback color */
-    }
-    
-    .header-background iframe,
-    .header-background img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border: none;
+      overflow: hidden;
     }
 
     .navbar {
@@ -455,8 +445,8 @@
 </head>
 <body>
   <header id="home">
-    <div class="header-background">
-      <!-- New Header Background Image -->
+    <div id="header-embed">
+      <!-- Header Background Image -->
       <script type="text/javascript" id="cr-embed-87269fc077d4d30e56fd6425" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
     </div>
     
