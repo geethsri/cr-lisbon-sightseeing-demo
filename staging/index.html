@@ -46,34 +46,17 @@
       z-index: 2000;
     }
 
-    /* LinkedIn-style header structure */
-    .header-container {
-      width: 100%;
-      position: relative;
-    }
-
+    /* Simplified header with no image */
     .navbar {
-      position: fixed;
-      top: 40px; /* Position below staging banner */
-      left: 0;
-      width: 100%;
-      padding: 1.2rem 3rem;
+      background-color: var(--dark);
+      padding: 1.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 40px; /* Room for staging banner */
       z-index: 1000;
-      transition: all 0.3s ease;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-
-    .navbar.scrolled {
-      background-color: rgba(255, 255, 255, 0.95);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 0.8rem 3rem;
-    }
-
-    .navbar.scrolled .nav-links a {
-      color: var(--dark);
     }
 
     .logo {
@@ -81,12 +64,6 @@
       font-weight: 700;
       color: white;
       text-decoration: none;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-
-    .navbar.scrolled .logo {
-      color: var(--primary);
-      text-shadow: none;
     }
 
     .nav-links {
@@ -100,86 +77,54 @@
       font-weight: 500;
       font-size: 1.1rem;
       transition: color 0.3s ease;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .nav-links a:hover {
       color: var(--secondary);
     }
 
-    /* Banner image container */
-    .banner-image-container {
-      width: 100%;
-      height: 400px; /* Fixed height for the banner */
-      overflow: hidden;
-      position: relative;
-      margin-top: 112px; /* Space for the navbar + staging banner */
-    }
-
-    .banner-image {
-      width: 100%;
-      height: 400px;
-      display: block;
-      position: relative;
-    }
-
-    .backup-banner {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none; /* Only show if embed fails */
-    }
-
-    /* Content section that overlaps with the banner */
-    .hero-content-container {
-      width: 100%;
-      background-color: transparent;
-      margin-top: -100px; /* Overlap with the banner */
-      padding-bottom: 50px;
-      position: relative;
-      z-index: 10;
+    /* Hero section with clean design */
+    .hero {
+      background-color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      margin-top: 40px; /* Space for staging banner */
     }
 
     .hero-content {
       max-width: 900px;
       margin: 0 auto;
-      padding: 40px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       position: relative;
     }
 
     .staging-badge {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 0;
+      right: 0;
       background-color: var(--staging-red);
       color: white;
       padding: 5px 10px;
-      border-radius: 20px;
+      border-radius: 5px;
       font-size: 0.8rem;
       font-weight: bold;
     }
 
     .hero-title {
-      font-size: 4rem;
-      margin-bottom: 1rem;
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
       color: var(--dark);
       font-weight: 800;
+      line-height: 1.2;
     }
 
     .hero-subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
       color: var(--lisbon-blue);
-      max-width: 700px;
+      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.5;
     }
 
     .btn {
@@ -188,3 +133,201 @@
       background-color: var(--secondary);
       color: var(--dark);
       text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--secondary);
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      color: var(--lisbon-blue);
+      font-size: 1.3rem;
+      line-height: 1.6;
+    }
+
+    .map-container {
+      height: 600px;
+      margin: 0 auto;
+      max-width: 1200px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .attractions {
+      background-color: white;
+    }
+
+    .attraction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .attraction-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .attraction-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .attraction-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--staging-red);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      z-index: 5;
+    }
+
+    .attraction-img-container {
+      height: 220px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .attraction-content {
+      padding: 1.8rem;
+    }
+
+    .attraction-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .attraction-desc {
+      margin-bottom: 1.5rem;
+      color: #6c757d;
+      line-height: 1.7;
+    }
+
+    .attraction-link {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .attraction-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .attraction-link:hover::after {
+      width: 100%;
+    }
+
+    .attraction-link:hover {
+      color: var(--lisbon-terracotta);
+    }
+
+    .gallery-section {
+      background-color: var(--tertiary);
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .crowdriff-embed {
+      margin: 0 auto;
+      max-width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-section {
+      background-color: white;
+    }
+
+    .footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position
