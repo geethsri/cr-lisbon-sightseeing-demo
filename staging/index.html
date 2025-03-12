@@ -13,23 +13,28 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    /* Lisbon-themed color palette */
     :root {
-      --primary: #0077b6;
-      --secondary: #fb8500;
+      --primary: #e63946; /* Lisbon red/pink */
+      --secondary: #f9c74f; /* Portuguese gold/yellow */
       --light: #f8f9fa;
-      --dark: #212529;
-      --accent: #48cae4;
+      --dark: #1d3557; /* Deep blue */
+      --accent: #43aa8b; /* Teal/turquoise */
+      --tertiary: #f1faee; /* Off-white */
+      --lisbon-terracotta: #c1502e; /* Terracotta roof color */
+      --lisbon-blue: #457b9d; /* Azulejo blue */
+      --staging-red: #ff3b30;
     }
 
     body {
-      background-color: var(--light);
+      background-color: var(--tertiary);
       color: var(--dark);
       overflow-x: hidden;
     }
 
     /* Staging banner */
     .staging-banner {
-      background-color: #ff4d4d;
+      background-color: var(--staging-red);
       color: white;
       text-align: center;
       padding: 10px;
@@ -51,27 +56,18 @@
       color: white;
       position: relative;
       margin-top: 40px; /* Make room for staging banner */
+      background: url('/api/placeholder/1200/600') center/cover no-repeat; /* Fallback background */
     }
 
-    /* Header background styles - improved for better image display */
-    .header-background {
+    /* Original CrowdRiff embed container */
+    #header-embed {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       z-index: 1;
-    }
-
-    .header-background iframe {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border: none;
-      transform: scale(1.1); /* Scale up slightly to avoid any gaps */
+      overflow: hidden;
     }
 
     .navbar {
@@ -79,18 +75,18 @@
       top: 40px; /* Position below staging banner */
       left: 0;
       width: 100%;
-      padding: 1.5rem 3rem;
+      padding: 1.2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .navbar.scrolled {
       background-color: rgba(255, 255, 255, 0.95);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 1rem 3rem;
+      padding: 0.8rem 3rem;
     }
 
     .navbar.scrolled .nav-links a {
@@ -102,10 +98,12 @@
       font-weight: 700;
       color: white;
       text-decoration: none;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .navbar.scrolled .logo {
       color: var(--primary);
+      text-shadow: none;
     }
 
     .nav-links {
@@ -119,6 +117,7 @@
       font-weight: 500;
       font-size: 1.1rem;
       transition: color 0.3s ease;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .nav-links a:hover {
@@ -133,34 +132,38 @@
     }
 
     .hero-title {
-      font-size: 4rem;
+      font-size: 4.5rem;
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      font-weight: 800;
     }
 
     .hero-subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+      max-width: 700px;
     }
 
     .btn {
       display: inline-block;
-      padding: 0.8rem 1.5rem;
+      padding: 1rem 2rem;
       background-color: var(--secondary);
-      color: white;
+      color: var(--dark);
       text-decoration: none;
-      font-weight: 600;
-      border-radius: 5px;
+      font-weight: 700;
+      border-radius: 50px;
       transition: all 0.3s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-size: 1.1rem;
     }
 
     .btn:hover {
-      background-color: #e67e00;
+      background-color: var(--primary);
+      color: white;
       transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
 
     .scroll-down {
@@ -171,6 +174,7 @@
       animation: bounce 2s infinite;
       cursor: pointer;
       z-index: 10;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes bounce {
@@ -186,184 +190,28 @@
     }
 
     section {
-      padding: 5rem 2rem;
+      padding: 6rem 2rem;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 1rem;
       color: var(--primary);
-    }
-
-    .section-subtitle {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 3rem;
-      color: #6c757d;
-      font-size: 1.2rem;
-    }
-
-    .map-container {
-      height: 600px;
-      margin: 0 auto;
-      max-width: 1200px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .attractions {
-      margin-top: 4rem;
-    }
-
-    .attraction-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .attraction-card {
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+      padding-bottom: 1rem;
     }
 
-    .staging-label {
+    .section-title::after {
+      content: '';
       position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(255, 77, 77, 0.8);
-      color: white;
-      padding: 3px 8px;
-      font-size: 0.8rem;
-      border-radius: 4px;
-      z-index: 10;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: var(--secondary);
+      border-radius: 2px;
     }
 
-    .attraction-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .attraction-img-container {
-      height: 200px;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .attraction-content {
-      padding: 1.5rem;
-    }
-
-    .attraction-title {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-
-    .attraction-desc {
-      margin-bottom: 1rem;
-      color: #6c757d;
-      line-height: 1.6;
-    }
-
-    .attraction-link {
-      display: inline-block;
-      color: var(--secondary);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .attraction-link:hover {
-      color: #e67e00;
-    }
-
-    .gallery-section {
-      background-color: #f1f5f9;
-    }
-
-    .gallery-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .crowdriff-embed {
-      margin: 0 auto;
-      max-width: 100%;
-    }
-
-    .footer {
-      background-color: var(--dark);
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      text-align: left;
-    }
-
-    .footer-section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-
-    .footer-section p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .social-link {
-      color: white;
-      font-size: 1.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .social-link:hover {
-      color: var(--secondary);
-    }
-
-    .footer-bottom {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid #4b5563;
-      font-size: 0.9rem;
-      color: #9ca3af;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 2;
-    }
-
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 3rem;
-      }
-
-      .navbar {
-        padding: 1
+    .section
