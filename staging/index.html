@@ -216,15 +216,19 @@
       transform: translateX(-50%);
     }
     
-    /* Container for map section to ensure proper alignment */
-    .map-section {
+    /* Special container to fix alignment and prevent side-anchoring */
+    .map-wrapper {
+      position: relative;
+      width: 100%;
       overflow: visible;
-      text-align: center;
+      display: flex;
+      justify-content: center;
     }
     
-    /* But allow map content to maintain its own alignment */
-    .map-section .map-container {
-      text-align: left;
+    .map-wrapper .map-container {
+      position: relative;
+      left: 0;
+      transform: none;
     }
     
     @media (max-width: 768px) {
@@ -583,9 +587,11 @@
     <h2 class="section-title">Interactive Map (STAGING)</h2>
     <p class="section-subtitle">Find your way around Lisbon's top sightseeing spots</p>
     
-    <div class="map-container">
-      <!-- Map Embed - STAGING VERSION (REPLACING WITH NEW MAP) -->
-      <script id="cr-init-map__6ea58b1902231a0b" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
+    <div class="map-wrapper">
+      <div class="map-container">
+        <!-- Map Embed - STAGING VERSION (REPLACING WITH NEW MAP) -->
+        <script id="cr-init-map__6ea58b1902231a0b" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
+      </div>
     </div>
   </section>
 
