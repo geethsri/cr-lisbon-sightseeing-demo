@@ -113,7 +113,14 @@
       .hero-map-container {
         height: 400px;
         padding: 0;
+        margin: 0;
         border-radius: 0;
+        width: 100%;
+        box-shadow: none;
+      }
+      
+      .hero {
+        padding: 5rem 0 0 0;
       }
     }
 
@@ -212,20 +219,21 @@
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
     
-    .second-map {
-      margin-top: 4rem;
-    }
-    
     @media (max-width: 768px) {
       .map-container {
         height: 450px;
         border-radius: 0;
         padding: 0;
-        margin: 1rem auto;
+        margin: 0;
+        box-shadow: none;
       }
       
       .map-section {
-        padding: 3rem 0;
+        padding: 3rem 0 0 0;
+      }
+      
+      .section-subtitle {
+        margin-bottom: 1rem;
       }
     }
 
@@ -569,7 +577,7 @@
     
     <div class="map-container">
       <!-- Map Embed - STAGING VERSION (REPLACING WITH THE SAME EMBED CODE FOR NOW) -->
-      <script id="cr-init-map__6ea58b1902231a0b" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
+      <script id="cr-init-map__d99f1ba127d48518" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
       <!-- NOTE: You should replace this with a different map embed as needed -->
     </div>
   </section>
