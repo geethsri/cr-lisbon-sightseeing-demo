@@ -86,7 +86,7 @@
     /* Hero section with clean design */
     .hero {
       background-color: white;
-      padding: 5rem 2rem;
+      padding: 5rem 2rem 0;
       text-align: center;
       margin-top: 40px; /* Space for staging banner */
     }
@@ -95,6 +95,20 @@
       max-width: 900px;
       margin: 0 auto;
       position: relative;
+      margin-bottom: 4rem;
+    }
+    
+    .hero-map-container {
+      width: 100vw;
+      max-width: 1400px;
+      margin: 0 auto;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 15px 15px 0 0;
     }
 
     .staging-badge {
@@ -432,6 +446,11 @@
       <h1 class="hero-title">Experience The Magic of Lisbon</h1>
       <p class="hero-subtitle">Discover the colorful streets, historic monuments, and breathtaking viewpoints of Portugal's enchanting capital</p>
       <a href="#attractions" class="btn">Explore Now</a>
+    </div>
+    
+    <div class="hero-map-container">
+      <!-- Map Embed -->
+      <script id="cr-init-map__d99f1ba127d48518" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
     </div>
   </section>
 
