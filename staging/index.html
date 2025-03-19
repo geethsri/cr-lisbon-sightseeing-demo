@@ -642,64 +642,11 @@
     <p class="section-subtitle">Find your way around Lisbon's top sightseeing spots</p>
     
     <div class="map-wrapper">
-      <div class="map-container" id="main-map-container">
-        <!-- Map will be inserted here via JavaScript -->
-      </div>
-    </div>
-    
-    <script>
-      // Wait for DOM to be fully loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        // Get the container
-        const container = document.getElementById('main-map-container');
-        
-        // Create a new div with a clean slate
-        const mapDiv = document.createElement('div');
-        mapDiv.className = 'map-isolated-content';
-        
-        // Enhanced style reset with !important flags and more comprehensive resets
-        mapDiv.style.cssText = `
-          all: initial !important;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-          color: initial !important;
-          background: transparent !important;
-          width: 100% !important;
-          height: 100% !important;
-          display: block !important;
-          box-sizing: border-box !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          border: none !important;
-          line-height: normal !important;
-          text-align: left !important;
-          font-size: medium !important;
-          font-weight: normal !important;
-        `;
-        
-        // Create a style element with a scoped selector
-        const styleEl = document.createElement('style');
-        // Use the class name we just added to scope the styles
-        styleEl.textContent = `
-          .map-isolated-content * {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-            box-sizing: border-box !important;
-          }
-        `;
-        mapDiv.appendChild(styleEl);
-        
-        // Create the map script
-        const mapScript = document.createElement('script');
-        mapScript.id = 'cr-init-map__6ea58b1902231a0b';
-        mapScript.src = 'https://map-embeds.derp.website/js/crowdriff.js';
-        mapScript.async = true;
-        
-        // Add the script to the clean div
-        mapDiv.appendChild(mapScript);
-        
-        // Add the clean div to your container
-        container.appendChild(mapDiv);
-      });
-    </script>
+  <div class="map-container" id="main-map-container">
+    <!-- Direct script embed without isolation -->
+    <script id="cr-init-map__6ea58b1902231a0b" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
+  </div>
+</div>
   </section>
 
   <section id="gallery" class="gallery-section">
