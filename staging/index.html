@@ -505,6 +505,7 @@
       
       // Create a new div with a clean slate
       const mapDiv = document.createElement('div');
+      mapDiv.className = 'map-isolated-content';
       
       // Enhanced style reset with !important flags and more comprehensive resets
       mapDiv.style.cssText = `
@@ -525,10 +526,11 @@
         font-weight: normal !important;
       `;
       
-      // Create a style element to reset inherited properties for child elements
+      // Create a style element with a scoped selector
       const styleEl = document.createElement('style');
+      // Use the class name we just added to scope the styles
       styleEl.textContent = `
-        * {
+        .map-isolated-content * {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
           box-sizing: border-box !important;
         }
@@ -653,6 +655,7 @@
         
         // Create a new div with a clean slate
         const mapDiv = document.createElement('div');
+        mapDiv.className = 'map-isolated-content';
         
         // Enhanced style reset with !important flags and more comprehensive resets
         mapDiv.style.cssText = `
@@ -673,10 +676,11 @@
           font-weight: normal !important;
         `;
         
-        // Create a style element to reset inherited properties for child elements
+        // Create a style element with a scoped selector
         const styleEl = document.createElement('style');
+        // Use the class name we just added to scope the styles
         styleEl.textContent = `
-          * {
+          .map-isolated-content * {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
             box-sizing: border-box !important;
           }
