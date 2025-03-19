@@ -1,55 +1,753 @@
-<div class="hero-map-container" id="hero-map-container">
-  <!-- Map will be inserted here via JavaScript -->
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STAGING - Discover Lisbon - Top Sightseeing Spots</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<script>
-  // Wait for DOM to be fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get the container
-    const container = document.getElementById('hero-map-container');
+    /* Lisbon-themed color palette */
+    :root {
+      --primary: #e63946; /* Lisbon red/pink */
+      --secondary: #f9c74f; /* Portuguese gold/yellow */
+      --light: #f8f9fa;
+      --dark: #1d3557; /* Deep blue */
+      --accent: #43aa8b; /* Teal/turquoise */
+      --tertiary: #f1faee; /* Off-white */
+      --lisbon-terracotta: #c1502e; /* Terracotta roof color */
+      --lisbon-blue: #457b9d; /* Azulejo blue */
+      --staging-red: #ff3b30;
+    }
+
+    body {
+      background-color: var(--tertiary);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Staging banner */
+    .staging-banner {
+      background-color: var(--staging-red);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 2000;
+    }
+
+    /* Simplified header with no image */
+    .navbar {
+      background-color: var(--dark);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 40px; /* Room for staging banner */
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary);
+    }
+
+    /* Hero section with clean design */
+    .hero {
+      background-color: white;
+      padding: 5rem 0 0;
+      margin-top: 40px; /* Space for staging banner */
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      margin-bottom: 4rem;
+      text-align: center;
+    }
     
-    // Create a new div with a clean slate
-    const mapDiv = document.createElement('div');
+    /* Ensure the map elements maintain their styling */
+    .hero-map-container {
+      text-align: left;
+    }
     
-    // More explicit style reset
-    mapDiv.style.cssText = `
-      all: initial !important;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-      color: initial !important;
-      background: transparent !important;
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: none !important;
-      line-height: normal !important;
-      text-align: left !important;
-      font-size: medium !important;
-      font-weight: normal !important;
-    `;
+    .hero-map-container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
     
-    // Create a style element to reset inherited properties
-    const styleEl = document.createElement('style');
-    styleEl.textContent = `
-      * {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-        box-sizing: border-box !important;
+    /* Let map elements use their own styling */
+    
+    @media (max-width: 768px) {
+      .hero-map-container {
+        height: 400px;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        width: 100%;
+        box-shadow: none;
       }
-    `;
-    mapDiv.appendChild(styleEl);
+      
+      .hero {
+        padding: 5rem 0 0 0;
+      }
+    }
+
+    .staging-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: var(--staging-red);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+      color: var(--lisbon-blue);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background-color: var(--secondary);
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      color: var(--lisbon-blue);
+      font-size: 1.3rem;
+      line-height: 1.6;
+    }
+
+    .map-container {
+      height: 500px;
+      margin: 2rem auto;
+      width: 130%;
+      max-width: 1400px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
     
-    // Create the map script
-    const mapScript = document.createElement('script');
-    mapScript.id = 'cr-init-map__d99f1ba127d48518';
-    mapScript.src = 'https://map-embeds.derp.website/js/crowdriff.js';
-    mapScript.async = true;
+    /* Special container to fix alignment and prevent side-anchoring */
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: visible;
+      display: flex;
+      justify-content: center;
+    }
     
-    // Add the script to the clean div
-    mapDiv.appendChild(mapScript);
+    .map-wrapper .map-container {
+      position: relative;
+      left: 0;
+      transform: none;
+    }
     
-    // Add the clean div to your container
-    container.appendChild(mapDiv);
-  });
-</script>
+    @media (max-width: 768px) {
+      .map-container {
+        height: 450px;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+      }
+      
+      .map-section {
+        padding: 3rem 0 0 0;
+      }
+      
+      .section-subtitle {
+        margin-bottom: 1rem;
+      }
+    }
+
+    .attractions {
+      background-color: white;
+    }
+
+    .attraction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .attraction-card {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .attraction-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .attraction-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--staging-red);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      z-index: 5;
+    }
+
+    .attraction-img-container {
+      height: 220px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .attraction-content {
+      padding: 1.8rem;
+    }
+
+    .attraction-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .attraction-desc {
+      margin-bottom: 1.5rem;
+      color: #6c757d;
+      line-height: 1.7;
+    }
+
+    .attraction-link {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .attraction-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .attraction-link:hover::after {
+      width: 100%;
+    }
+
+    .attraction-link:hover {
+      color: var(--lisbon-terracotta);
+    }
+
+    .gallery-section {
+      background-color: var(--tertiary);
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .crowdriff-embed {
+      margin: 0 auto;
+      max-width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-section {
+      background-color: white;
+    }
+
+    .footer {
+      background-color: var(--dark);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 1.5px;
+    }
+
+    .footer-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      color: var(--secondary);
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3.5rem;
+      }
+
+      .navbar {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+
+      .btn {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+      
+      .section-title {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body id="home">
+  <div class="staging-banner">STAGING ENVIRONMENT - FOR TESTING ONLY</div>
+  
+  <nav class="navbar">
+    <a href="#" class="logo">Discover Lisbon</a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#attractions">Attractions</a>
+      <a href="#map">Map</a>
+      <a href="#gallery">Gallery</a>
+    </div>
+  </nav>
+  
+<!-- HTML Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="staging-badge">STAGING</div>
+    <h1 class="hero-title">Experience The Magic of Lisbon</h1>
+    <p class="hero-subtitle">Discover the colorful streets, historic monuments, and breathtaking viewpoints of Portugal's enchanting capital</p>
+    <a href="#attractions" class="btn">Explore Now</a>
+  </div>
+  
+  <div class="hero-map-container" id="hero-map-container">
+    <!-- Map will be inserted here via JavaScript -->
+  </div>
+
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the container
+      const container = document.getElementById('hero-map-container');
+      
+      // Create a new div with a clean slate
+      const mapDiv = document.createElement('div');
+      
+      // Enhanced style reset with !important flags and more comprehensive resets
+      mapDiv.style.cssText = `
+        all: initial !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+        color: initial !important;
+        background: transparent !important;
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        line-height: normal !important;
+        text-align: left !important;
+        font-size: medium !important;
+        font-weight: normal !important;
+      `;
+      
+      // Create a style element to reset inherited properties for child elements
+      const styleEl = document.createElement('style');
+      styleEl.textContent = `
+        * {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+          box-sizing: border-box !important;
+        }
+      `;
+      mapDiv.appendChild(styleEl);
+      
+      // Create the map script
+      const mapScript = document.createElement('script');
+      mapScript.id = 'cr-init-map__d99f1ba127d48518';
+      mapScript.src = 'https://map-embeds.derp.website/js/crowdriff.js';
+      mapScript.async = true;
+      
+      // Add the script to the clean div
+      mapDiv.appendChild(mapScript);
+      
+      // Add the clean div to your container
+      container.appendChild(mapDiv);
+    });
+  </script>
+</section>
+
+  <section id="attractions" class="attractions">
+    <h2 class="section-title">Top Attractions</h2>
+    <p class="section-subtitle">Explore the most beautiful and historic sights Lisbon has to offer</p>
+
+    <div class="attraction-grid">
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- Augusta Arch Embed -->
+          <script type="text/javascript" id="cr-embed-999300e1a79a56ac2ecb5255" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Arco da Rua Augusta</h3>
+          <p class="attraction-desc">This triumphant arch connects Rua Augusta to the impressive Praça do Comércio. Climb to the top for panoramic views of downtown Lisbon and the Tagus River.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- Tram Photo Embed -->
+          <script type="text/javascript" id="cr-embed-556a10ea90911f80c2fe71f8" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Tram 28</h3>
+          <p class="attraction-desc">Hop on this iconic yellow tram for a scenic journey through Lisbon's historic neighborhoods. The route passes by many major attractions and offers a glimpse into local life.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- New Image Embed 1 -->
+          <script type="text/javascript" id="cr-embed-eff5367a2781cd8db79b7b46" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Alfama District</h3>
+          <p class="attraction-desc">Lose yourself in Lisbon's oldest neighborhood, a labyrinth of narrow streets, ancient houses, and hidden squares. Experience authentic Fado music in local taverns.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- New Image Embed 2 -->
+          <script type="text/javascript" id="cr-embed-4a83164628befbf149f5ad91" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">São Jorge Castle</h3>
+          <p class="attraction-desc">Perched atop Lisbon's highest hill, this ancient castle offers panoramic views of the city. Explore the archaeological site and walk along the medieval walls.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- Generic Lisbon Embed -->
+          <script type="text/javascript" id="cr-embed-8ff05b57ecbb70402ee706ad" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">LX Factory</h3>
+          <p class="attraction-desc">Once an industrial complex, now a creative hub filled with shops, restaurants, and art spaces. Visit on Sunday for the weekly market featuring local artisans and vintage finds.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="attraction-card">
+        <div class="attraction-badge">STAGING</div>
+        <div class="attraction-img-container">
+          <!-- Pastel de Nata Embed -->
+          <script type="text/javascript" id="cr-embed-c4d338ed55d6caa9e3d300a8" src="https://post.crowdriff.com/js/crowdriff.js" async></script>
+        </div>
+        <div class="attraction-content">
+          <h3 class="attraction-title">Pastéis de Belém</h3>
+          <p class="attraction-desc">Visit the original bakery that has been making the famous Pastéis de Nata since 1837. These delicious custard tarts are a culinary icon of Portugal and a must-try delicacy.</p>
+          <a href="#" class="attraction-link">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="map" class="map-section">
+    <h2 class="section-title">Interactive Map (STAGING)</h2>
+    <p class="section-subtitle">Find your way around Lisbon's top sightseeing spots</p>
+    
+    <div class="map-wrapper">
+      <div class="map-container" id="main-map-container">
+        <!-- Map will be inserted here via JavaScript -->
+      </div>
+    </div>
+    
+    <script>
+      // Wait for DOM to be fully loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get the container
+        const container = document.getElementById('main-map-container');
+        
+        // Create a new div with a clean slate
+        const mapDiv = document.createElement('div');
+        
+        // Enhanced style reset with !important flags and more comprehensive resets
+        mapDiv.style.cssText = `
+          all: initial !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+          color: initial !important;
+          background: transparent !important;
+          width: 100% !important;
+          height: 100% !important;
+          display: block !important;
+          box-sizing: border-box !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          border: none !important;
+          line-height: normal !important;
+          text-align: left !important;
+          font-size: medium !important;
+          font-weight: normal !important;
+        `;
+        
+        // Create a style element to reset inherited properties for child elements
+        const styleEl = document.createElement('style');
+        styleEl.textContent = `
+          * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+            box-sizing: border-box !important;
+          }
+        `;
+        mapDiv.appendChild(styleEl);
+        
+        // Create the map script
+        const mapScript = document.createElement('script');
+        mapScript.id = 'cr-init-map__6ea58b1902231a0b';
+        mapScript.src = 'https://map-embeds.derp.website/js/crowdriff.js';
+        mapScript.async = true;
+        
+        // Add the script to the clean div
+        mapDiv.appendChild(mapScript);
+        
+        // Add the clean div to your container
+        container.appendChild(mapDiv);
+      });
+    </script>
+  </section>
+
+  <section id="gallery" class="gallery-section">
+    <h2 class="section-title">Lisbon Gallery (STAGING)</h2>
+    <p class="section-subtitle">Browse through stunning images of Lisbon's most beautiful spots</p>
+    
+    <div class="gallery-container">
+      <!-- Gallery Embed - STAGING VERSION -->
+      <div class="crowdriff-embed">
+        <script id="cr-init__744cc7296d455721" src="https://starling.derp.website/js/crowdriff.js" async></script>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>Discover Lisbon is your ultimate guide to exploring the vibrant capital of Portugal. We provide curated information on the best attractions, hidden gems, and local experiences.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: info@discoverlisbon.com</p>
+        <p>Phone: +351 123 456 789</p>
+        <p>Address: Praça do Comércio, Lisbon, Portugal</p>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <p>Stay updated with our latest tips and recommendations</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Discover Lisbon. All rights reserved. | STAGING VERSION</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
