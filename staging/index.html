@@ -484,19 +484,87 @@
     </div>
   </nav>
   
-  <section class="hero">
-    <div class="hero-content">
-      <div class="staging-badge">STAGING</div>
-      <h1 class="hero-title">Experience The Magic of Lisbon</h1>
-      <p class="hero-subtitle">Discover the colorful streets, historic monuments, and breathtaking viewpoints of Portugal's enchanting capital</p>
-      <a href="#attractions" class="btn">Explore Now</a>
-    </div>
+<!-- HTML Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="staging-badge">STAGING</div>
+    <h1 class="hero-title">Experience The Magic of Lisbon</h1>
+    <p class="hero-subtitle">Discover the colorful streets, historic monuments, and breathtaking viewpoints of Portugal's enchanting capital</p>
+    <a href="#attractions" class="btn">Explore Now</a>
+  </div>
+  
+  <div class="hero-map-container" id="hero-map-container">
+  <!-- Map will be inserted here via JavaScript -->
+</div>
+
+<script>
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the container
+    const container = document.getElementById('hero-map-container');
     
-    <div class="hero-map-container">
-      <!-- Map Embed -->
-      <script id="cr-init-map__d99f1ba127d48518" src="https://map-embeds.derp.website/js/crowdriff.js" async></script>
-    </div>
-  </section>
+    // Create a new div with a clean slate
+    const mapDiv = document.createElement('div');
+    mapDiv.style.cssText = `
+      all: initial;
+      width: 100%;
+      height: 100%;
+      display: block;
+      box-sizing: border-box;
+    `;
+    
+    // Create the map script
+    const mapScript = document.createElement('script');
+    mapScript.id = 'cr-init-map__d99f1ba127d48518';
+    mapScript.src = 'https://map-embeds.derp.website/js/crowdriff.js';
+    mapScript.async = true;
+    
+    // Add the script to the clean div
+    mapDiv.appendChild(mapScript);
+    
+    // Add the clean div to your container
+    container.appendChild(mapDiv);
+  });
+</script>
+
+<!-- CSS to add to your stylesheet -->
+<style>
+  /* Map Style Isolation */
+  .map-isolation-wrapper {
+    /* Create a new stacking context */
+    position: relative;
+    z-index: 1;
+    
+    /* Reset all inherited styles */
+    all: initial;
+    
+    /* Maintain box sizing */
+    box-sizing: border-box;
+    
+    /* Ensure the wrapper takes full size of container */
+    width: 100%;
+    height: 100%;
+    
+    /* Prevent external styles from affecting embedded content */
+    isolation: isolate;
+  }
+  
+  /* Target any iframes that might be created by the map script */
+  .map-isolation-wrapper iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  /* Ensure the map container maintains proper dimensions */
+  .hero-map-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust height as needed */
+    overflow: hidden;
+  }
+</style>
 
   <section id="attractions" class="attractions">
     <h2 class="section-title">Top Attractions</h2>
